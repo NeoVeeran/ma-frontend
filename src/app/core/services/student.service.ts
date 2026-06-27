@@ -23,4 +23,10 @@ export class StudentService {
   deleteStudent(id: number) {
     return this.http.delete(`${this.apiUrl}/students/${id}`);
   }
+  getStudentById(id: number) {
+    return this.http.get<Student>(`${this.apiUrl}/students/${id}`);
+  }
+  updateStudent(id: number, student: Student) {
+    return this.http.put<Student>(`${this.apiUrl}/students/${id}`, student);
+  }
 }

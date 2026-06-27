@@ -5,8 +5,31 @@
     Add Student
   </button>
 </div>
+<div class="filter-container">
+  <mat-form-field appearance="outline">
+    <mat-label>Search Student</mat-label>
 
-<table mat-table [dataSource]="students">
+    <input
+      matInput
+      placeholder="Search by name"
+      [(ngModel)]="searchText"
+      (keyup)="applyFilters()"
+    />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Belt</mat-label>
+
+    <mat-select [(ngModel)]="selectedBelt" (selectionChange)="applyFilters()">
+      <mat-option value="">All</mat-option>
+
+      <mat-option *ngFor="let belt of belts" [value]="belt">
+        {{ belt }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+<table mat-table [dataSource]="filteredStudents">
   <ng-container matColumnDef="id">
     <th mat-header-cell *matHeaderCellDef>ID</th>
     <td mat-cell *matCellDef="let student">
@@ -32,7 +55,11 @@
     <th mat-header-cell *matHeaderCellDef>Actions</th>
 
     <td mat-cell *matCellDef="let student">
-      <button mat-icon-button>
+      <button
+        mat-icon-button
+        color="primary"
+        [routerLink]="['/students/edit', student.id]"
+      >
         <mat-icon>edit</mat-icon>
       </button>
 

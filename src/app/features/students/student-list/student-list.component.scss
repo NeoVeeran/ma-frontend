@@ -8,3 +8,14 @@
 table {
   width: 100%;
 }
+
+.filter-container {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 20px;
+  align-items: center;
+}
+
+.filter-container mat-form-field {
+  width: 250px;
+}

@@ -1,7 +1,7 @@
 <div class="student-container">
   <mat-card>
     <mat-card-header>
-      <mat-card-title>Add Student</mat-card-title>
+      {{ isEdit ? "Update Student" : "Add Student" }}
     </mat-card-header>
 
     <mat-card-content>
@@ -31,8 +31,8 @@
           </mat-select>
         </mat-form-field>
 
-        <button mat-raised-button color="primary" (click)="save()">
-          Save Student
+        <button mat-raised-button color="primary" (click)="submit()">
+          {{ isEdit ? "Update" : "Save" }}
         </button>
       </form>
     </mat-card-content>

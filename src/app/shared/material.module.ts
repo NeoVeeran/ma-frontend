@@ -8,6 +8,10 @@ import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+import { MatDividerModule } from '@angular/material/divider';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   exports: [
@@ -19,6 +23,10 @@ import { MatSelectModule } from '@angular/material/select';
     MatToolbarModule,
     MatIconModule,
     MatSelectModule,
+    MatSidenavModule,
+    MatListModule,
+    MatDividerModule,
+    FormsModule,
   ],
 })
 export class MaterialModule {}
