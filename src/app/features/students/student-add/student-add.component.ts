@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { StudentService } from 'src/app/core/services/student.service';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog.component';
 @Component({
   selector: 'app-student-add',
   templateUrl: './student-add.component.html',
@@ -18,6 +20,7 @@ export class StudentAddComponent {
     private studentService: StudentService,
     private route: ActivatedRoute,
     private router: Router,
+    private dialog: MatDialog,
   ) {}
   ngOnInit() {
     this.buildAddStudentForm();
@@ -57,8 +60,23 @@ export class StudentAddComponent {
     }
   }
   createStudent() {
-    this.studentService.addStudent(this.form.value).subscribe(() => {
-      this.router.navigate(['/students']);
+    this.studentService.addStudent(this.form.value).subscribe({
+      next: () => {
+        this.router.navigate(['/students']);
+      },
+      error: (err) => {
+        if (err.status === 409) {
+          this.dialog.open(ConfirmDialogComponent, {
+            width: '350px',
+            data: {
+              title: 'Duplicate Email',
+              message: 'Email already exists.',
+              buttonText: 'OK',
+              hideCancel: true,
+            },
+          });
+        }
+      },
     });
   }
   updateStudent() {

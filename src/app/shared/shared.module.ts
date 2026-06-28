@@ -5,9 +5,10 @@ import { MaterialModule } from './material.module';
 import { RouterModule } from '@angular/router';
 import { NavbarComponent } from './navbar/navbar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { ConfirmDialogComponent } from './components/confirm-dialog.component';
 
 @NgModule({
-  declarations: [NavbarComponent, SidebarComponent],
+  declarations: [NavbarComponent, SidebarComponent, ConfirmDialogComponent],
   imports: [CommonModule, ReactiveFormsModule, MaterialModule, RouterModule],
   exports: [
     CommonModule,

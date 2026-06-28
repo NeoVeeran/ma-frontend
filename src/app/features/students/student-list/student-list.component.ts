@@ -1,6 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { StudentService } from '../../../core/services/student.service';
 import { Student } from '../../../core/models/student.model';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog.component';
 
 @Component({
   selector: 'app-student-list',
@@ -8,36 +13,49 @@ import { Student } from '../../../core/models/student.model';
 })
 export class StudentListComponent implements OnInit {
   students: Student[] = [];
-  filteredStudents: Student[] = [];
+  dataSource = new MatTableDataSource<Student>();
   displayedColumns = ['id', 'name', 'beltRank', 'actions'];
   searchText = '';
   selectedBelt = '';
   belts: string[] = [];
-  constructor(private studentService: StudentService) {}
+  constructor(
+    private studentService: StudentService,
+    private dialog: MatDialog,
+  ) {}
+  @ViewChild(MatPaginator)
+  paginator!: MatPaginator;
+  @ViewChild(MatSort)
+  sort!: MatSort;
 
   ngOnInit(): void {
     this.loadStudents();
     this.loadBelts();
+    this.dataSource.filterPredicate = (student: Student, filter: string) => {
+      const criteria = JSON.parse(filter);
+      const matchesSearch = student.name
+        .toLowerCase()
+        .includes(criteria.search.toLowerCase());
+      const matchesBelt = !criteria.belt || student.beltRank === criteria.belt;
+      return matchesSearch && matchesBelt;
+    };
+  }
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
   loadStudents() {
     this.studentService.getStudents().subscribe({
       next: (res: Student[]) => {
         this.students = res;
-        this.filteredStudents = res;
+        this.dataSource.data = res;
       },
-      error: (err) => console.error(err),
     });
   }
+
   applyFilters() {
-    this.filteredStudents = this.students.filter((student) => {
-      const matchesSearch = student.name
-        .toLowerCase()
-        .includes(this.searchText.toLowerCase());
-
-      const matchesBelt =
-        !this.selectedBelt || student.beltRank === this.selectedBelt;
-
-      return matchesSearch && matchesBelt;
+    this.dataSource.filter = JSON.stringify({
+      search: this.searchText,
+      belt: this.selectedBelt,
     });
   }
 
@@ -50,11 +68,23 @@ export class StudentListComponent implements OnInit {
   }
 
   deleteStudent(id: number) {
-    this.studentService.deleteStudent(id).subscribe({
-      next: () => {
-        this.loadStudents();
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '350px',
+      data: {
+        title: 'Delete Student',
+        message: 'Are you sure you want to delete this student?',
+        buttonText: 'Delete',
       },
-      error: (err) => console.error(err),
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.studentService.deleteStudent(id).subscribe({
+          next: () => {
+            this.loadStudents();
+          },
+          error: (err) => console.error(err),
+        });
+      }
     });
   }
 }

@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -12,6 +11,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatDividerModule } from '@angular/material/divider';
 import { FormsModule } from '@angular/forms';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   exports: [
@@ -27,6 +29,9 @@ import { FormsModule } from '@angular/forms';
     MatListModule,
     MatDividerModule,
     FormsModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatDialogModule,
   ],
 })
 export class MaterialModule {}
