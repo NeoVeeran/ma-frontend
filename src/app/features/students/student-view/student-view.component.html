@@ -1,0 +1,22 @@
+<mat-card *ngIf="student">
+  <mat-card-title>
+    {{ student.name }}
+  </mat-card-title>
+
+  <mat-card-content>
+    <p>
+      <strong>Email:</strong>
+      {{ student.email }}
+    </p>
+
+    <p>
+      <strong>Phone:</strong>
+      {{ student.phone }}
+    </p>
+
+    <p>
+      <strong>Belt:</strong>
+      {{ student.beltRank }}
+    </p>
+  </mat-card-content>
+</mat-card>

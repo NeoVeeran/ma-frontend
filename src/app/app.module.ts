@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LayoutModule } from './core/layout/layout.module';
+import { DashboardModule } from './features/dashboard/dashboard.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -15,6 +16,7 @@ import { LayoutModule } from './core/layout/layout.module';
     HttpClientModule,
     BrowserAnimationsModule,
     LayoutModule,
+    DashboardModule,
   ],
   bootstrap: [AppComponent],
 })

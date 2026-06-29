@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { StudentListComponent } from './student-list/student-list.component';
 import { StudentAddComponent } from './student-add/student-add.component';
 import { StudentEditComponent } from './student-edit/student-edit.component';
+import { StudentViewComponent } from './student-view/student-view.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,10 @@ const routes: Routes = [
   {
     path: 'edit/:id',
     component: StudentAddComponent,
+  },
+  {
+    path: 'view/:id',
+    component: StudentViewComponent,
   },
 ];
 

@@ -28,8 +28,10 @@ const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: 'students',
-        pathMatch: 'full',
+        loadChildren: () =>
+          import('./features/dashboard/dashboard.module').then(
+            (m) => m.DashboardModule,
+          ),
       },
     ],
   },
