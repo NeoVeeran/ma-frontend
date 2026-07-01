@@ -12,8 +12,11 @@ const routes: Routes = [
     path: 'add',
     component: AttendanceAddComponent,
   },
+  {
+    path: 'edit/:id',
+    component: AttendanceAddComponent,
+  },
 ];
-
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
