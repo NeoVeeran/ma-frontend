@@ -1,47 +1,57 @@
 <div class="dashboard-container">
-  <h1 class="page-title">Dashboard</h1>
+  <mat-card class="welcome-card">
+    <div>
+      <h1>Welcome Back 👋</h1>
 
-  <p class="page-subtitle">Welcome to the Martial Arts Management System</p>
+      <p>Martial Arts Management System</p>
+    </div>
 
-  <div class="cards">
-    <mat-card class="card students">
-      <mat-card-content>
-        <div class="card-header">
-          <span>Total Students</span>
-        </div>
+    <div class="actions">
+      <button mat-raised-button color="primary" routerLink="/students/add">
+        Add Student
+      </button>
 
-        <h1>{{ dashboard?.totalStudents }}</h1>
-      </mat-card-content>
+      <button mat-raised-button color="accent" routerLink="/attendance/add">
+        Attendance
+      </button>
+
+      <button mat-raised-button color="warn" routerLink="/fees/add">
+        Add Fee
+      </button>
+    </div>
+  </mat-card>
+
+  <div class="card-grid">
+    <mat-card class="dashboard-card students">
+      <mat-icon>groups</mat-icon>
+
+      <h2>Total Students</h2>
+
+      <h1>{{ dashboard?.totalStudents }}</h1>
     </mat-card>
 
-    <mat-card class="card present">
-      <mat-card-content>
-        <div class="card-header">
-          <span>Present Today</span>
-        </div>
+    <mat-card class="dashboard-card present">
+      <mat-icon>check_circle</mat-icon>
 
-        <h1>{{ dashboard?.presentToday }}</h1>
-      </mat-card-content>
+      <h2>Present Today</h2>
+
+      <h1>{{ dashboard?.presentToday }}</h1>
     </mat-card>
 
-    <mat-card class="card absent">
-      <mat-card-content>
-        <div class="card-header">
-          <span>Absent Today</span>
-        </div>
+    <mat-card class="dashboard-card absent">
+      <mat-icon>cancel</mat-icon>
 
-        <h1>{{ dashboard?.absentToday }}</h1>
-      </mat-card-content>
+      <h2>Absent Today</h2>
+
+      <h1>{{ dashboard?.absentToday }}</h1>
     </mat-card>
 
-    <mat-card class="card fees">
-      <mat-card-content>
-        <div class="card-header">
-          <span>Fees Pending</span>
-        </div>
+    <mat-card class="dashboard-card fees">
+      <mat-icon>payments</mat-icon>
 
-        <h1>{{ dashboard?.feesPending }}</h1>
-      </mat-card-content>
+      <h2>Fees Pending</h2>
+
+      <h1>₹ {{ dashboard?.feesPending }}</h1>
     </mat-card>
   </div>
 </div>

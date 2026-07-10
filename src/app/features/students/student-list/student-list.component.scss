@@ -1,8 +1,15 @@
 .header {
   display: flex;
+
   justify-content: space-between;
+
   align-items: center;
-  margin-bottom: 1rem;
+}
+
+.header div {
+  display: flex;
+
+  gap: 12px;
 }
 
 table {

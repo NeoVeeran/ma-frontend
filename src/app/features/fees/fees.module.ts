@@ -1,10 +1,13 @@
 import { NgModule } from '@angular/core';
+
+import { SharedModule } from '../../shared/shared.module';
 import { FeesRoutingModule } from './fees-routing.module';
-import { FeeAddComponent } from './fee-add/fee-add.component';
+
 import { FeeListComponent } from './fee-list/fee-list.component';
-import { SharedModule } from 'src/app/shared/shared.module';
+import { FeeAddComponent } from './fee-add/fee-add.component';
+
 @NgModule({
   declarations: [FeeListComponent, FeeAddComponent],
-  imports: [FeesRoutingModule, SharedModule],
+  imports: [SharedModule, FeesRoutingModule],
 })
 export class FeesModule {}

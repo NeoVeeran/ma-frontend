@@ -1,1 +1,33 @@
-<p>attendance-add works!</p>
+<mat-card>
+  <mat-card-title>
+    {{ isEdit ? "Edit Attendance" : "Mark Attendance" }}
+  </mat-card-title>
+
+  <mat-card-content>
+    <form [formGroup]="form">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Student</mat-label>
+
+        <mat-select formControlName="studentId">
+          <mat-option *ngFor="let student of students" [value]="student.id">
+            {{ student.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Attendance</mat-label>
+
+        <mat-select formControlName="present">
+          <mat-option [value]="true"> Present </mat-option>
+
+          <mat-option [value]="false"> Absent </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" (click)="saveAttendance()">
+        {{ isEdit ? "Update" : "Save" }}
+      </button>
+    </form>
+  </mat-card-content>
+</mat-card>

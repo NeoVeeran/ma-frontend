@@ -6,6 +6,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog.component';
+import { ExcelService } from 'src/app/core/services/excel.service';
 
 @Component({
   selector: 'app-student-list',
@@ -21,6 +22,7 @@ export class StudentListComponent implements OnInit {
   constructor(
     private studentService: StudentService,
     private dialog: MatDialog,
+    private excelService: ExcelService,
   ) {}
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
@@ -86,5 +88,20 @@ export class StudentListComponent implements OnInit {
         });
       }
     });
+  }
+  exportStudents() {
+    const data = this.students.map((student) => ({
+      ID: student.id,
+
+      Name: student.name,
+
+      Email: student.email,
+
+      Phone: student.phone,
+
+      Belt: student.beltRank,
+    }));
+
+    this.excelService.exportAsExcelFile(data, 'Students');
   }
 }

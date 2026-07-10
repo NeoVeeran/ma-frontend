@@ -1,9 +1,15 @@
 <div class="header">
   <h2>Students</h2>
 
-  <button mat-raised-button color="primary" routerLink="/students/add">
-    Add Student
-  </button>
+  <div>
+    <button mat-raised-button color="accent" (click)="exportStudents()">
+      Export Excel
+    </button>
+
+    <button mat-raised-button color="primary" routerLink="/students/add">
+      Add Student
+    </button>
+  </div>
 </div>
 <div class="filter-container">
   <mat-form-field appearance="outline">
