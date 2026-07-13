@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Student } from 'src/app/core/models/student.model';
 
 import {
   AttendanceService,
@@ -51,8 +52,11 @@ export class AttendanceAddComponent implements OnInit {
 
   loadStudents() {
     this.studentService.getStudents().subscribe({
-      next: (res) => {
-        this.students = res;
+      next: (students: Student[]) => {
+        this.students = students;
+      },
+      error: (err) => {
+        console.error(err);
       },
     });
   }

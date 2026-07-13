@@ -8,6 +8,18 @@ const routes: Routes = [
     component: LayoutComponent,
     children: [
       {
+        path: '',
+        redirectTo: 'dashboard',
+        pathMatch: 'full',
+      },
+      {
+        path: 'dashboard',
+        loadChildren: () =>
+          import('./features/dashboard/dashboard.module').then(
+            (m) => m.DashboardModule,
+          ),
+      },
+      {
         path: 'students',
         loadChildren: () =>
           import('./features/students/students.module').then(
@@ -26,16 +38,15 @@ const routes: Routes = [
         loadChildren: () =>
           import('./features/fees/fees.module').then((m) => m.FeesModule),
       },
-      {
-        path: '',
-        loadChildren: () =>
-          import('./features/dashboard/dashboard.module').then(
-            (m) => m.DashboardModule,
-          ),
-      },
     ],
   },
+
+  {
+    path: '**',
+    redirectTo: 'dashboard',
+  },
 ];
+
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],

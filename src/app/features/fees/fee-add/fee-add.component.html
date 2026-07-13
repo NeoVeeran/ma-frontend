@@ -31,7 +31,12 @@
         </mat-select>
       </mat-form-field>
 
-      <button mat-raised-button color="primary" (click)="saveFee()">
+      <button
+        mat-raised-button
+        color="primary"
+        [disabled]="form.invalid"
+        (click)="saveFee()"
+      >
         {{ isEdit ? "Update" : "Save" }}
       </button>
     </form>

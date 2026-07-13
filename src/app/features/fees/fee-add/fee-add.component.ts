@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Student } from 'src/app/core/models/student.model';
 
 import { Fee, FeeService } from 'src/app/core/services/fee.service';
 import { StudentService } from 'src/app/core/services/student.service';
@@ -33,7 +34,7 @@ export class FeeAddComponent implements OnInit {
 
       amount: ['', Validators.required],
 
-      paid: [false],
+      paid: [false, Validators.required],
     });
 
     this.loadStudents();
@@ -51,8 +52,11 @@ export class FeeAddComponent implements OnInit {
 
   loadStudents() {
     this.studentService.getStudents().subscribe({
-      next: (res) => {
-        this.students = res;
+      next: (students: Student[]) => {
+        this.students = students;
+      },
+      error: (err) => {
+        console.error(err);
       },
     });
   }

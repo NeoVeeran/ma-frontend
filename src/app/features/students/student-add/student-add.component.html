@@ -1,8 +1,8 @@
 <div class="student-container">
   <mat-card>
-    <mat-card-header>
+    <mat-card-title>
       {{ isEdit ? "Update Student" : "Add Student" }}
-    </mat-card-header>
+    </mat-card-title>
 
     <mat-card-content>
       <form [formGroup]="form">
@@ -25,7 +25,10 @@
           <mat-label>Belt Rank</mat-label>
 
           <mat-select formControlName="beltRank">
-            <mat-option *ngFor="let belt of belts" [value]="belt">
+            <mat-option
+              *ngFor="let belt of belts; trackBy: trackByValue"
+              [value]="belt"
+            >
               {{ belt }}
             </mat-option>
           </mat-select>

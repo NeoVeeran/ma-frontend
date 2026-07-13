@@ -34,9 +34,13 @@ export class StudentAddComponent {
     });
   }
   loadBelts() {
-    this.studentService.getAllBelts().subscribe((data) => {
-      console.log('Belts API Response:', data);
-      this.belts = data;
+    this.studentService.getAllBelts().subscribe({
+      next: (res: any) => {
+        this.belts = res;
+      },
+      error: () => {
+        console.error();
+      },
     });
   }
   buildAddStudentForm() {
@@ -85,5 +89,8 @@ export class StudentAddComponent {
       .subscribe(() => {
         this.router.navigate(['/students']);
       });
+  }
+  trackByValue(_: number, value: string): string {
+    return value;
   }
 }

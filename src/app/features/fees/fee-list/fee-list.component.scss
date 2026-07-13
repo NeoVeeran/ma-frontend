@@ -11,3 +11,29 @@ table {
 
   margin-bottom: 20px;
 }
+
+.header h2 {
+  margin: 0;
+}
+
+.header p {
+  color: #777;
+
+  margin-top: 4px;
+}
+
+.empty-state {
+  margin-top: 50px;
+
+  text-align: center;
+
+  color: #777;
+}
+
+.empty-state mat-icon {
+  width: 60px;
+
+  height: 60px;
+
+  font-size: 60px;
+}

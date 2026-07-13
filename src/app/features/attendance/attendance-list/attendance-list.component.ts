@@ -15,7 +15,12 @@ import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog
 export class AttendanceListComponent implements OnInit {
   attendanceList: Attendance[] = [];
 
-  displayedColumns = ['studentName', 'attendanceDate', 'present', 'actions'];
+  readonly displayedColumns: string[] = [
+    'studentName',
+    'attendanceDate',
+    'present',
+    'actions',
+  ];
 
   constructor(
     private attendanceService: AttendanceService,

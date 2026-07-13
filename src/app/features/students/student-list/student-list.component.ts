@@ -7,6 +7,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog.component';
 import { ExcelService } from 'src/app/core/services/excel.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-student-list',
@@ -15,7 +16,7 @@ import { ExcelService } from 'src/app/core/services/excel.service';
 export class StudentListComponent implements OnInit {
   students: Student[] = [];
   dataSource = new MatTableDataSource<Student>();
-  displayedColumns = ['id', 'name', 'beltRank', 'actions'];
+  readonly displayedColumns: string[] = ['id', 'name', 'beltRank', 'actions'];
   searchText = '';
   selectedBelt = '';
   belts: string[] = [];
@@ -23,6 +24,7 @@ export class StudentListComponent implements OnInit {
     private studentService: StudentService,
     private dialog: MatDialog,
     private excelService: ExcelService,
+    private title: Title,
   ) {}
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
@@ -30,14 +32,18 @@ export class StudentListComponent implements OnInit {
   sort!: MatSort;
 
   ngOnInit(): void {
+    this.title.setTitle('SMS');
     this.loadStudents();
     this.loadBelts();
-    this.dataSource.filterPredicate = (student: Student, filter: string) => {
-      const criteria = JSON.parse(filter);
-      const matchesSearch = student.name
+    this.dataSource.filterPredicate = (data: Student, filter: string) => {
+      const search = JSON.parse(filter);
+
+      const matchesSearch = data.name
         .toLowerCase()
-        .includes(criteria.search.toLowerCase());
-      const matchesBelt = !criteria.belt || student.beltRank === criteria.belt;
+        .includes(search.search.toLowerCase());
+
+      const matchesBelt = !search.belt || data.beltRank === search.belt;
+
       return matchesSearch && matchesBelt;
     };
   }
@@ -47,18 +53,25 @@ export class StudentListComponent implements OnInit {
   }
   loadStudents() {
     this.studentService.getStudents().subscribe({
-      next: (res: Student[]) => {
-        this.students = res;
-        this.dataSource.data = res;
+      next: (students: Student[]) => {
+        this.students = students;
+        this.dataSource.data = students;
+      },
+      error: (err) => {
+        console.error(err);
       },
     });
   }
 
-  applyFilters() {
+  applyFilters(): void {
     this.dataSource.filter = JSON.stringify({
       search: this.searchText,
       belt: this.selectedBelt,
     });
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
   loadBelts() {

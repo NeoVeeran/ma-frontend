@@ -12,7 +12,12 @@ import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog
 export class FeeListComponent implements OnInit {
   fees: Fee[] = [];
 
-  displayedColumns = ['studentName', 'amount', 'status', 'actions'];
+  readonly displayedColumns: string[] = [
+    'studentName',
+    'amount',
+    'status',
+    'actions',
+  ];
 
   constructor(
     private feeService: FeeService,
