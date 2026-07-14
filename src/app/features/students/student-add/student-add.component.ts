@@ -4,7 +4,7 @@ import { StudentService } from 'src/app/core/services/student.service';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
-import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog.component';
+import { ConfirmDialogComponent } from 'src/app/shared/component/confirm-dialog/confirm-dialog.component';
 @Component({
   selector: 'app-student-add',
   templateUrl: './student-add.component.html',

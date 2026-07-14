@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
 import { Fee, FeeService } from 'src/app/core/services/fee.service';
-import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog.component';
+import { ConfirmDialogComponent } from 'src/app/shared/component/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-fee-list',

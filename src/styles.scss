@@ -16,15 +16,13 @@ body {
 }
 
 .success-snackbar {
-  --mdc-snackbar-container-color: #4caf50;
-
-  --mat-mdc-snack-bar-button-color: white;
+  --mdc-snackbar-container-color: #2e7d32;
+  --mat-mdc-snack-bar-button-color: #ffffff;
 }
 
 .error-snackbar {
-  --mdc-snackbar-container-color: #f44336;
-
-  --mat-mdc-snack-bar-button-color: white;
+  --mdc-snackbar-container-color: #c62828;
+  --mat-mdc-snack-bar-button-color: #ffffff;
 }
 
 .info-snackbar {

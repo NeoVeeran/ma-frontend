@@ -5,7 +5,7 @@ import {
   Attendance,
   AttendanceService,
 } from 'src/app/core/services/attendance.service';
-import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog.component';
+import { ConfirmDialogComponent } from 'src/app/shared/component/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-attendance-list',
