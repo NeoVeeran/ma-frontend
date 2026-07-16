@@ -1,17 +1,25 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
 import { LayoutComponent } from './core/layout/layout/layout.component';
+import { LoginComponent } from './features/auth/login/login.component';
 
 const routes: Routes = [
   {
     path: '',
+    redirectTo: 'login',
+    pathMatch: 'full',
+  },
+
+  {
+    path: 'login',
+    component: LoginComponent,
+  },
+
+  {
+    path: '',
     component: LayoutComponent,
     children: [
-      {
-        path: '',
-        redirectTo: 'dashboard',
-        pathMatch: 'full',
-      },
       {
         path: 'dashboard',
         loadChildren: () =>
@@ -19,6 +27,7 @@ const routes: Routes = [
             (m) => m.DashboardModule,
           ),
       },
+
       {
         path: 'students',
         loadChildren: () =>
@@ -26,6 +35,7 @@ const routes: Routes = [
             (m) => m.StudentsModule,
           ),
       },
+
       {
         path: 'attendance',
         loadChildren: () =>
@@ -33,6 +43,7 @@ const routes: Routes = [
             (m) => m.AttendanceModule,
           ),
       },
+
       {
         path: 'fees',
         loadChildren: () =>
@@ -43,7 +54,7 @@ const routes: Routes = [
 
   {
     path: '**',
-    redirectTo: 'dashboard',
+    redirectTo: 'login',
   },
 ];
 

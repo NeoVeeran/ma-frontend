@@ -10,10 +10,18 @@ import { DashboardModule } from './features/dashboard/dashboard.module';
 import { LoadingInterceptor } from './core/interceptors/loading.interceptor';
 import { SharedModule } from './shared/shared.module';
 import { ErrorInterceptor } from './core/interceptors/error.interceptor';
+import { LoginComponent } from './features/auth/login/login.component';
+import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, LoginComponent],
   providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true,
+    },
+
     {
       provide: HTTP_INTERCEPTORS,
       useClass: LoadingInterceptor,
