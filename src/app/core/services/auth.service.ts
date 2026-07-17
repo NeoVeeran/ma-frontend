@@ -5,6 +5,7 @@ import { Observable, tap } from 'rxjs';
 import { environment } from '../services/environments';
 import { LoginRequest } from '../models/login-request';
 import { LoginResponse } from '../models/login-response';
+import { User } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root',
@@ -32,5 +33,9 @@ export class AuthService {
 
   isLoggedIn(): boolean {
     return !!this.getToken();
+  }
+
+  getCurrentUser(): Observable<User> {
+    return this.http.get<User>(`${this.apiUrl}/me`);
   }
 }
